@@ -158,10 +158,11 @@ function truncateToLimit(message, limit) {
 function generateMessage(problems) {
   const count = problems.length;
   
-  // If no problems solved, return a random insult
+  // If no problems solved, return a random insult with header
   if (count === 0) {
     const insult = INSULT_MESSAGES[Math.floor(Math.random() * INSULT_MESSAGES.length)];
-    return truncateToLimit(insult, TWEET_CHAR_LIMIT);
+    const message = `📊 CF Daily Report:\n\n${insult}`;
+    return truncateToLimit(message, TWEET_CHAR_LIMIT);
   }
   
   const median = getMedianRating(problems);
@@ -176,7 +177,7 @@ function generateMessage(problems) {
   }
   
   // Build the message header
-  let header = `📊 CF Daily Report\n\n${praise}\n\n`;
+  let header = `📊 CF Daily Report:\n\n${praise}\n\n`;
   header += `✅ Problems: ${count}`;
   
   // Only show median rating if at least one problem has a rating
